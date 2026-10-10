@@ -121,11 +121,7 @@
             "name": "experience",
             "type": "select",
             "placeholder": "Agenda tu experiencia",
-            "options": [
-              "Hair Studio",
-              "Nails Bar",
-              "Makeup & Brow"
-            ]
+            "options": ["Hair Studio", "Nails Bar", "Makeup & Brow"]
           },
           {
             "name": "location",
@@ -171,15 +167,7 @@
       "mobile_reservar_cita": {
         "header": "AGENDA TU CITA",
         "calendar_widget": {
-          "days_header": [
-            "L",
-            "M",
-            "M",
-            "J",
-            "V",
-            "S",
-            "D"
-          ]
+          "days_header": ["L", "M", "M", "J", "V", "S", "D"]
         },
         "dropdowns": [
           {
@@ -213,7 +201,7 @@
       "https://images.pexels.com/photos/15923916/pexels-photo-15923916.jpeg?auto=compress&cs=tinysrgb&w=900"
     ],
     "makeup": "https://images.pexels.com/photos/7256651/pexels-photo-7256651.jpeg?auto=compress&cs=tinysrgb&w=1000",
-    "artist": "https://images.pexels.com/photos/5188621/pexels-photo-5188621.jpeg?auto=compress&cs=tinysrgb&w=900",
+    "artist": "images/IvanCerezoBioWeb.jpg",
     "portfolio": [
       "https://images.pexels.com/photos/30691549/pexels-photo-30691549.jpeg?auto=compress&cs=tinysrgb&w=700",
       "https://images.pexels.com/photos/16442705/pexels-photo-16442705.jpeg?auto=compress&cs=tinysrgb&w=700",
