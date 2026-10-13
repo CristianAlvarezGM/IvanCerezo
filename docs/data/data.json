@@ -1,35 +1,35 @@
 {
   "project_metadata": {
-    "title": "CASO DE ESTUDIO / IVÁN CEREZO HAIR STUDIO",
-    "location": "MEXICALI, BAJA CALIFORNIA",
-    "subtitle": "EXPERIENCIA DIGITAL DE LUJO • VISUAL EXPERIENCE BOARD",
-    "brand_name": "IVÁN CEREZO HAIR STUDIO",
+    "title": "Iván Cerezo Hair Studio | Estilista en Mexicali",
+    "location": "Mexicali, Baja California",
+    "subtitle": "Alta peluquería, colorimetría de autor y experiencia digital de lujo",
+    "brand_name": "Iván Cerezo Hair Studio",
     "target_goal": "Captación de clientes, reserva de citas y presentación de portafolio de servicios de belleza de lujo"
   },
   "navigation": {
     "logo": {
-      "text": "IVÁN CEREZO HAIR STUDIO",
-      "alt": "Iván Cerezo Hair Studio Logo"
+      "text": "Iván Cerezo Hair Studio",
+      "alt": "Iván Cerezo Hair Studio Mexicali"
     },
     "menu_items": [
       {
-        "label": "INICIO",
+        "label": "Inicio",
         "href": "#inicio"
       },
       {
-        "label": "SERVICIOS",
+        "label": "Servicios",
         "href": "#servicios"
       },
       {
-        "label": "PORTAFOLIO",
+        "label": "Portafolio",
         "href": "#portafolio"
       },
       {
-        "label": "NOSOTROS",
+        "label": "Nosotros",
         "href": "#nosotros"
       },
       {
-        "label": "RESERVAS",
+        "label": "Reservas",
         "href": "#reservas"
       }
     ]
@@ -37,33 +37,33 @@
   "sections": {
     "hero": {
       "id": "01_desktop_inicio",
-      "title": "EL ARTE DE LA ALTA PELUQUERÍA",
-      "description": "Experiencia digital de lujo, atención personalizada, experto en diseño de imagen y color de alto nivel.",
+      "title": "Estilista en Mexicali: el arte de la alta peluquería",
+      "description": "Iván Cerezo Hair Studio en Mexicali eleva tu imagen con balayage en Mexicali, rubios personalizados, couture blonde, corrección de color, corte de diseño y servicios de belleza de lujo.",
       "cta": {
-        "text": "RESERVAR AHORA",
+        "text": "Reservar ahora",
         "action": "open_booking_modal",
         "href": "#reservas"
       }
     },
     "services_overview": {
       "id": "02_desktop_servicios",
-      "title": "NUESTRAS EXPERIENCIAS",
+      "title": "Peluquería en Mexicali y experiencias de belleza de autor",
       "categories": [
         {
           "id": "hair_studio",
-          "name": "HAIR STUDIO",
+          "name": "Balayage en Mexicali",
           "active": true,
           "href": "#hair-studio"
         },
         {
           "id": "cerezo_nails_bar",
-          "name": "CEREZO NAILS BAR",
+          "name": "Cerezo Nails Bar",
           "active": false,
           "href": "#nails-bar"
         },
         {
           "id": "belleza_maquillaje",
-          "name": "BELLEZA & MAQUILLAJE",
+          "name": "Maquillaje profesional para novias",
           "active": false,
           "href": "#makeup"
         }
@@ -71,118 +71,129 @@
     },
     "hair_studio_detail": {
       "id": "03_desktop_hair_studio",
-      "title": "HAIR STUDIO",
+      "title": "Balayage en Mexicali, rubios personalizados y couture blonde",
       "services_list": [
-        "Balayage",
+        "Balayage en Mexicali",
         "Rubios personalizados",
+        "Couture blonde",
         "Corrección de color",
         "Corte de diseño"
       ]
     },
     "nails_bar": {
       "id": "04_desktop_cerezo_nails_bar",
-      "title": "LUXURY NAILS",
-      "subtitle": "CEREZO NAILS BAR",
+      "title": "Cerezo Nails Bar",
+      "subtitle": "Uñas de gel Mexicali",
       "services_list": [
+        "Uñas de gel Mexicali",
         "Manicure",
         "Pedicure",
-        "Esmaltado en Gel",
+        "Esmaltado en gel",
         "Spa de manos y pies"
       ]
     },
     "makeup_and_brow": {
       "id": "05_desktop_maquillaje_y_cejas",
-      "title": "HIGH-END MAKEUP & BROW",
+      "title": "Maquillaje profesional para novias y diseño de cejas",
       "services_list": [
-        "Diseño de cejas",
-        "Laminado",
+        "Diseño y arquitectura de cejas",
+        "Laminado de cejas",
         "Maquillaje profesional",
-        "Novias"
+        "Maquillaje profesional para novias",
+        "Asesoría de imagen"
       ]
     },
     "portfolio": {
       "id": "06_desktop_portafolio",
-      "title": "PORTAFOLIO"
+      "title": "Portafolio de trabajos de alta peluquería"
     },
     "about_us": {
       "id": "07_desktop_sobre_nosotros",
-      "role": "DESIGNER",
+      "role": "Designer / Color Specialist",
       "author": "Iván Cerezo",
-      "bio": "Especialista en alta peluquería, diseño de imagen y colorimetría avanzada. Enfocado en resaltar la belleza natural de cada cliente a través de técnicas de vanguardia y productos de lujo.",
-      "quote": "Brand identity statement: ensuloss en de color.",
-      "imageCaption": "Brand identity"
+      "bio": "Especialista en alta peluquería, colorimetría avanzada, rubios personalizados y diseño de imagen. Creamos experiencias privadas de belleza con enfoque en precisión técnica, elegancia y transformación personal.",
+      "quote": "Cada imagen debe sentirse tan refinada como auténtica.",
+      "imageCaption": "Iván Cerezo Hair Studio Mexicali"
     },
     "reservations": {
       "id": "08_desktop_reservaciones",
-      "title": "Agenda tu Experiencia",
+      "title": "Agenda tu experiencia",
       "form": {
         "fields": [
           {
             "name": "experience",
             "type": "select",
-            "placeholder": "Agenda tu experiencia",
-            "options": ["Hair Studio", "Nails Bar", "Makeup & Brow"]
+            "placeholder": "Selecciona tu experiencia",
+            "options": [
+              "Balayage en Mexicali",
+              "Rubios personalizados / Couture blonde",
+              "Corrección de color",
+              "Corte de diseño",
+              "Cerezo Nails Bar",
+              "Maquillaje profesional para novias",
+              "Diseño y arquitectura de cejas"
+            ]
           },
           {
             "name": "location",
             "type": "text",
             "value": "Mexicali, B.C.",
-            "icon_name": "map_pin",
+            "icon_name": "map-pin",
             "readonly": true
           }
         ],
         "submit_button": {
-          "text": "RESERVAR VÍA WHATSAPP / ONLINE",
+          "text": "Reservar vía WhatsApp",
           "action": "submit_booking"
         }
       },
       "location_map": {
         "city": "Mexicali, B.C.",
-        "google_maps_url": "https://maps.google.com/?q=Mexicali,B.C."
+        "google_maps_url": "https://maps.google.com/?q=Calz.+de+las+Am%C3%A9ricas+1489,+San+Gabriel,+Mexicali,+B.C."
       }
     },
     "mobile_views": {
       "mobile_inicio": {
-        "brand": "IVÁN CEREZO",
-        "tagline": "Hair Studio",
-        "cta": "RESERVAR"
+        "brand": "Iván Cerezo",
+        "tagline": "Hair Studio Mexicali",
+        "cta": "Reservar"
       },
       "mobile_servicios": {
-        "header": "ELEGIR SERVICIOS",
+        "header": "Elegir servicios",
         "options": [
           {
-            "title": "Hair Studio"
+            "title": "Balayage en Mexicali"
           },
           {
-            "title": "Nails Bar"
+            "title": "Cerezo Nails Bar"
           },
           {
-            "title": "Belleza"
+            "title": "Maquillaje profesional"
           }
         ]
       },
       "mobile_portafolio": {
-        "header": "PORTAFOLIO"
+        "header": "Portafolio"
       },
       "mobile_reservar_cita": {
-        "header": "AGENDA TU CITA",
+        "header": "Agenda tu cita",
         "calendar_widget": {
           "days_header": ["L", "M", "M", "J", "V", "S", "D"]
         },
         "dropdowns": [
           {
-            "label": "Selecciona Servicio"
+            "label": "Selecciona servicio"
           },
           {
-            "label": "Selecciona Hora"
+            "label": "Selecciona hora"
           }
         ],
         "inputs": [
           {
-            "placeholder": "Nombre y Teléfono"
+            "placeholder": "Nombre y teléfono"
           }
         ],
-        "cta": "RESERVAR CITA"
+        "cta": "Reservar cita"
       }
     }
   },
@@ -214,12 +225,15 @@
     ]
   },
   "ui": {
-    "services_intro": "Una curaduría de servicios pensada para crear tu versión más auténtica.",
+    "services_intro": "Una curaduría de servicios pensada para crear tu versión más auténtica en un entorno privado y sofisticado.",
     "discover": "Descubrir experiencia",
     "reserve_experience": "Reservar experiencia",
-    "reservation_lead": "Regálate un momento creado completamente para ti.",
-    "reservation_meta": "Citas personalizadas",
-    "instagram_url": "https://www.instagram.com",
+    "reservation_lead": "Regálate un momento creado completamente para ti en Iván Cerezo Hair Studio Mexicali.",
+    "reservation_meta": "Citas personalizadas en Mexicali",
+    "instagram_url": "https://www.instagram.com/ivancerezostudio",
+    "phone": "+526865163912",
+    "whatsapp_phone": "526865163912",
+    "address": "Calz. de las Américas 1489, Local 1, San Gabriel, 21210 Mexicali, B.C.",
     "service_images": [
       "https://images.pexels.com/photos/16442705/pexels-photo-16442705.jpeg?auto=compress&cs=tinysrgb&w=900",
       "https://images.pexels.com/photos/35491156/pexels-photo-35491156.jpeg?auto=compress&cs=tinysrgb&w=900",
@@ -231,7 +245,7 @@
         "number": "03",
         "source": "hair_studio_detail",
         "image": "https://images.pexels.com/photos/19342940/pexels-photo-19342940.jpeg?auto=compress&cs=tinysrgb&w=900",
-        "alt": "Cabello rubio con ondas",
+        "alt": "Balayage rubio de autor en Mexicali - Iván Cerezo Hair Studio",
         "reverse": false
       },
       {
@@ -239,7 +253,7 @@
         "number": "04",
         "source": "nails_bar",
         "image": "https://images.pexels.com/photos/17280274/pexels-photo-17280274.jpeg?auto=compress&cs=tinysrgb&w=900",
-        "alt": "Manicure nude de lujo",
+        "alt": "Uñas de gel Mexicali con acabado premium en Cerezo Nails Bar",
         "reverse": true
       },
       {
@@ -247,7 +261,7 @@
         "number": "05",
         "source": "makeup_and_brow",
         "image": "https://images.pexels.com/photos/7256651/pexels-photo-7256651.jpeg?auto=compress&cs=tinysrgb&w=1000",
-        "alt": "Maquillaje profesional editorial",
+        "alt": "Maquillaje profesional para novias en Mexicali con acabado editorial",
         "reverse": false
       }
     ]
