@@ -4,7 +4,7 @@
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const icon = (name, size) => `<i data-lucide="${name}" style="width:${size}px;height:${size}px"></i>`;
-  const label = (el, text) => { el.innerHTML = `<span></span>${esc(text)}`; };
+  const label = (el, text) => { if (el) el.innerHTML = `<span></span>${esc(text)}`; };
   const refreshIcons = () => { if (window.lucide) window.lucide.createIcons(); };
 
   let data;
@@ -19,24 +19,38 @@
     $('mobile-nav').innerHTML =
       items.map((item) => `<a href="${esc(item.href)}">${esc(item.label)}</a>`).join('') +
       `<button type="button" class="gold-button" data-open-booking>${esc(cta)}${icon('arrow-up-right', 15)}</button>`;
-    document.querySelector('.header-cta').innerHTML = `${esc(cta)}${icon('arrow-up-right', 15)}`;
+    const headerCta = document.querySelector('.header-cta');
+    if (headerCta) headerCta.innerHTML = `${esc(cta)}${icon('arrow-up-right', 15)}`;
   }
 
   function renderHero() {
     const { hero } = data.sections;
     const m = data.project_metadata;
     label($('hero-label'), `${m.location} • ${m.subtitle}`);
+    
+    // Si el HTML estático ya contiene la versión SEO, respeta o actualiza textContent
     $('hero-title').textContent = hero.title;
     $('hero-description').textContent = hero.description;
     $('hero-cta').innerHTML = `${esc(hero.cta.text)}${icon('arrow-up-right', 16)}`;
-    $('hero-img-main').src = data.images.hero;
-    $('hero-img-side').src = data.images.heroPortrait;
+
+    // Optimización LCP: fetchpriority="high" y loading="eager"
+    const imgMain = $('hero-img-main');
+    const imgSide = $('hero-img-side');
+    
+    imgMain.src = data.images.hero;
+    imgMain.alt = hero.title;
+    imgMain.setAttribute('fetchpriority', 'high');
+    imgMain.setAttribute('loading', 'eager');
+
+    imgSide.src = data.images.heroPortrait;
+    imgSide.alt = hero.title;
+    imgSide.setAttribute('fetchpriority', 'high');
+    imgSide.setAttribute('loading', 'eager');
   }
 
   function renderServices() {
     const s = data.sections;
-    label($('services-label'), s.services_overview.id.replace('_', ' / ').replace(/_/g, ' '));
-    $('services-title').textContent = s.services_overview.title;
+    label($('services-label'), s.services_overview.id.replace('_', ' / ').replace(/_/g, ' '));$('services-title').textContent = s.services_overview.title;
     $('services-intro').textContent = data.ui.services_intro;
     $('service-detail-link').innerHTML = `${esc(data.ui.discover)} ${icon('arrow-up-right', 15)}`;
     $('service-menu').innerHTML = s.services_overview.categories
@@ -85,19 +99,23 @@
 
   function renderPortfolio() {
     const p = data.sections.portfolio;
-    label($('portfolio-label'), p.id.replace(/_/g, ' '));
-    $('portfolio-title').textContent = p.title;
+    const portfolioAlts = data.images.portfolioAlt || [];
+    label($('portfolio-label'), p.id.replace(/_/g, ' '));$('portfolio-title').textContent = p.title;
     $('portfolio-grid').innerHTML = data.images.portfolio
-      .map((src, i) => `<div class="portfolio-item portfolio-${i + 1}"><img src="${esc(src)}" alt="Trabajo de estilismo ${i + 1}" loading="lazy" /><span>0${i + 1}</span></div>`)
+      .map((src, i) => {
+        const altText = portfolioAlts[i] || `Trabajo de estilismo por Iván Cerezo ${i + 1}`;
+        return `<div class="portfolio-item portfolio-${i + 1}"><img src="${esc(src)}" alt="${esc(altText)}" loading="lazy" /><span>0${i + 1}</span></div>`;
+      })
       .join('');
   }
 
   function renderAbout() {
     const a = data.sections.about_us;
-    $('about-img').src = data.images.artist;
+    const aboutImg = $('about-img');
+    aboutImg.src = data.images.artist;
+    aboutImg.alt = a.imageCaption || "Iván Cerezo, estilista en Mexicali";
     $('about-caption').textContent = a.imageCaption;
-    label($('about-label'), a.id.replace(/_/g, ' '));
-    $('about-role').textContent = a.role;
+    label($('about-label'), a.id.replace(/_/g, ' '));$('about-role').textContent = a.role;
     $('about-author').textContent = a.author;
     $('about-bio').textContent = a.bio;
     $('about-quote').textContent = `“${a.quote}”`;
@@ -108,23 +126,39 @@
     const submit = r.form.submit_button.text;
     const labelText = r.id.replace(/_/g, ' ');
     label($('reservation-label'), labelText);
-    label($('modal-label'), labelText);
-    $('reservation-title').textContent = r.title;
+    label($('modal-label'), labelText);$('reservation-title').textContent = r.title;
     $('modal-title').textContent = r.title;
     $('reservation-lead').textContent = data.ui.reservation_lead;
     $('reservation-cta').innerHTML = `${esc(submit)}${icon('arrow-up-right', 16)}`;
     $('form-submit').innerHTML = `${esc(submit)}${icon('arrow-up-right', 16)}`;
     $('reservation-city').textContent = r.location_map.city;
     $('reservation-meta').textContent = data.ui.reservation_meta;
+    
     const exp = r.form.fields[0];
     $('form-experience').innerHTML = `<option value="">${esc(exp.placeholder)}</option>` +
-      exp.options.map((o) => `<option>${esc(o)}</option>`).join('');
+      exp.options.map((o) => `<option value="${esc(o)}">${esc(o)}</option>`).join('');
   }
 
   function renderFooter() {
+    const phone = data.ui.phone || "6865163912";
+    const phoneFormatted = data.ui.phone_formatted || "+52 (686) 516-3912";
+    const currentYear = new Date().getFullYear();
+
     $('footer-location').textContent = data.project_metadata.location;
     $('footer-instagram').href = data.ui.instagram_url;
-    $('footer-copy').textContent = `© 2024 ${data.project_metadata.brand_name}`;
+    $('footer-copy').textContent = `© ${currentYear} ${data.project_metadata.brand_name}`;
+
+    // Renderizar bloque NAP (Name, Address, Phone)
+    const footerAddress = $('footer-address');
+    if (footerAddress) {
+      footerAddress.innerHTML = `
+        <address style="font-style: normal; line-height: 1.6;">
+          Calz. de las Américas 1489, Local 1, San Gabriel, 21210 Mexicali, B.C.<br>
+          Tel: <a href="tel:+52${phone}">${esc(phoneFormatted)}</a><br>
+          ${esc(data.ui.schedule || "Lun–Vie 10:00–20:00 · Sáb 10:00–18:00")}
+        </address>
+      `;
+    }
   }
 
   /* Interacciones */
@@ -135,16 +169,17 @@
   }
 
   function openBooking() {
-    $('booking-form').reset();
-    $('booking-success').hidden = true;
+    $('booking-form').reset();$('booking-success').hidden = true;
     $('booking-content').hidden = false;
     $('booking-modal').hidden = false;
   }
-  function closeBooking() { $('booking-modal').hidden = true; }
+  
+  function closeBooking() { 
+    $('booking-modal').hidden = true; 
+  }
 
   function bindEvents() {
-    $('menu-toggle').addEventListener('click', () => setMenu($('mobile-nav').hidden));
-    $('mobile-nav').addEventListener('click', (e) => { if (e.target.closest('a, button')) setMenu(false); });
+    $('menu-toggle').addEventListener('click', () => setMenu($('mobile-nav').hidden));$('mobile-nav').addEventListener('click', (e) => { if (e.target.closest('a, button')) setMenu(false); });
 
     document.addEventListener('click', (e) => {
       if (e.target.closest('[data-open-booking]')) openBooking();
@@ -153,13 +188,26 @@
     $('booking-modal').addEventListener('mousedown', (e) => { if (e.target === e.currentTarget) closeBooking(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBooking(); });
 
+    // Enviar reservación vía WhatsApp directamente con los datos capturados
     $('booking-form').addEventListener('submit', (e) => {
       e.preventDefault();
+      const f = new FormData(e.target);
+      const name = f.get('name') || '';
+      const experience = f.get('experience') || 'Consulta General';
+      const date = f.get('date') || 'Por definir';
+      const time = f.get('time') || 'Por definir';
+      const phone = f.get('phone') || '';
+
+      const phoneNum = data.ui.phone || "6865163912";
+      const msg = `Hola, soy ${name}. Quiero agendar: ${experience}, el día ${date} a las ${time}. Teléfono de contacto: ${phone}.`;
+      
+      window.open(`https://wa.me/52${phoneNum}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+      
       $('booking-content').hidden = true;
       $('booking-success').hidden = false;
     });
 
-    // Enlace activo en navegación de escritorio
+    // Enlace activo en navegación de escritorio durante el desplazamiento
     const links = Array.from(document.querySelectorAll('#desktop-nav .nav-link'));
     const sections = links.map((l) => document.querySelector(l.getAttribute('href')));
     const onScroll = () => {
