@@ -114,8 +114,20 @@
     }
   },
   "images": {
-    "hero": "images/hero-main.webp",
-    "heroPortrait": "images/hero-side.webp",
+    "hero": "https://images.pexels.com/photos/30691549/pexels-photo-30691549.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "heroPortrait": "https://images.pexels.com/photos/9016422/pexels-photo-9016422.jpeg?auto=compress&cs=tinysrgb&w=900",
+    "hair": [
+      "https://images.pexels.com/photos/16442705/pexels-photo-16442705.jpeg?auto=compress&cs=tinysrgb&w=900",
+      "https://images.pexels.com/photos/19342940/pexels-photo-19342940.jpeg?auto=compress&cs=tinysrgb&w=900",
+      "https://images.pexels.com/photos/20894559/pexels-photo-20894559.jpeg?auto=compress&cs=tinysrgb&w=900",
+      "https://images.pexels.com/photos/20894552/pexels-photo-20894552.jpeg?auto=compress&cs=tinysrgb&w=900"
+    ],
+    "nails": [
+      "https://images.pexels.com/photos/35491156/pexels-photo-35491156.jpeg?auto=compress&cs=tinysrgb&w=900",
+      "https://images.pexels.com/photos/17280274/pexels-photo-17280274.jpeg?auto=compress&cs=tinysrgb&w=900",
+      "https://images.pexels.com/photos/15923916/pexels-photo-15923916.jpeg?auto=compress&cs=tinysrgb&w=900"
+    ],
+    "makeup": "https://images.pexels.com/photos/7256651/pexels-photo-7256651.jpeg?auto=compress&cs=tinysrgb&w=1000",
     "artist": "images/IvanCerezoBioWeb.jpg",
     "portfolioAlt": [
       "Balayage rubio de autor en Mexicali - Iván Cerezo Hair Studio",
