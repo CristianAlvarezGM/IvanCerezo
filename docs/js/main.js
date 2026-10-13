@@ -9,6 +9,11 @@
 
   let data;
 
+  function setText(id, text) {
+    const el = $(id);
+    if (el) el.textContent = text;
+  }
+
   function renderNav() {
     const items = data.navigation.menu_items;
 
@@ -152,9 +157,11 @@
   }
 
   function renderFooter() {
-    $('footer-location').textContent = data.project_metadata.location;
-    $('footer-instagram').href = data.ui.instagram_url;
-    $('footer-copy').textContent = `© ${new Date().getFullYear()} ${data.project_metadata.brand_name}`;
+    setText('footer-location', data.project_metadata.location);
+    setText('footer-copy', `© ${new Date().getFullYear()} ${data.project_metadata.brand_name}`);
+
+    const ig = $('footer-instagram');
+    if (ig) ig.href = data.ui.instagram_url;
   }
 
   function setMenu(open) {
