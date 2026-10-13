@@ -8,17 +8,19 @@
   const refreshIcons = () => { if (window.lucide) window.lucide.createIcons(); };
 
   let data;
-  let activeService = 0;
 
   function renderNav() {
     const items = data.navigation.menu_items;
+
     $('desktop-nav').innerHTML = items
       .map((item, i) => `<a href="${esc(item.href)}" class="nav-link${i === 0 ? ' active' : ''}">${esc(item.label)}</a>`)
       .join('');
+
     const cta = data.sections.hero.cta.text;
     $('mobile-nav').innerHTML =
       items.map((item) => `<a href="${esc(item.href)}">${esc(item.label)}</a>`).join('') +
       `<button type="button" class="gold-button" data-open-booking>${esc(cta)}${icon('arrow-up-right', 15)}</button>`;
+
     document.querySelector('.header-cta').innerHTML = `${esc(cta)}${icon('arrow-up-right', 15)}`;
   }
 
@@ -26,7 +28,6 @@
     const { hero } = data.sections;
     const m = data.project_metadata;
     label($('hero-label'), `${m.location} • ${m.subtitle}`);
-    $('hero-title').textContent = hero.title;
     $('hero-description').textContent = hero.description;
     $('hero-cta').innerHTML = `${esc(hero.cta.text)}${icon('arrow-up-right', 16)}`;
     $('hero-img-main').src = data.images.hero;
@@ -35,30 +36,37 @@
 
   function renderServices() {
     const s = data.sections;
-    label($('services-label'), s.services_overview.id.replace('_', ' / ').replace(/_/g, ' '));
+    label($('services-label'), s.services_overview.id.replace(/_/g, ' '));
     $('services-title').textContent = s.services_overview.title;
     $('services-intro').textContent = data.ui.services_intro;
     $('service-detail-link').innerHTML = `${esc(data.ui.discover)} ${icon('arrow-up-right', 15)}`;
+
     $('service-menu').innerHTML = s.services_overview.categories
-      .map((c, i) => `<button type="button" data-service="${i}">` +
-        `<span>0${i + 1}</span>${esc(c.name)}${icon('arrow-up-right', 15)}</button>`)
+      .map((c, i) => (
+        `<button type="button" data-service="${i}">` +
+        `<span>0${i + 1}</span>${esc(c.name)}${icon('arrow-up-right', 15)}</button>`
+      ))
       .join('');
+
     $('service-menu').addEventListener('click', (e) => {
       const btn = e.target.closest('[data-service]');
       if (btn) selectService(Number(btn.dataset.service));
     });
+
     selectService(0);
   }
 
   function selectService(index) {
-    activeService = index;
     const s = data.sections;
     const cat = s.services_overview.categories[index];
     const details = [s.hair_studio_detail, s.nails_bar, s.makeup_and_brow][index];
+
     document.querySelectorAll('#service-menu button').forEach((b, i) => b.classList.toggle('selected', i === index));
+
     const img = $('service-img');
     img.src = data.ui.service_images[index];
     img.alt = cat.name;
+
     $('service-overlay-num').textContent = `0${index + 1}`;
     $('service-overlay-name').textContent = cat.name;
     $('service-detail-num').textContent = `0${index + 1}`;
@@ -71,14 +79,19 @@
       .map((svc) => {
         const src = data.sections[svc.source];
         const title = src.subtitle ? `${src.title} / ${src.subtitle}` : src.title;
+
         return `<section id="${esc(svc.id)}" class="split-service page-section${svc.reverse ? ' reverse' : ''}">
-          <div class="split-image"><img src="${esc(svc.image)}" alt="${esc(svc.alt)}" loading="lazy" /><span class="image-index">${esc(svc.number)}</span></div>
+          <div class="split-image">
+            <img src="${esc(svc.image)}" alt="${esc(svc.alt)}" loading="lazy" decoding="async" width="900" height="1100" />
+            <span class="image-index">${esc(svc.number)}</span>
+          </div>
           <div class="split-copy">
             <p class="section-label"><span></span>${esc(svc.number)} / DESKTOP • ${esc(title)}</p>
             <h2>${esc(title)}</h2>
             <ul>${src.services_list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>
             <a class="text-link" href="#reservas">${esc(data.ui.reserve_experience)} ${icon('arrow-up-right', 15)}</a>
-          </div></section>`;
+          </div>
+        </section>`;
       })
       .join('');
   }
@@ -87,8 +100,23 @@
     const p = data.sections.portfolio;
     label($('portfolio-label'), p.id.replace(/_/g, ' '));
     $('portfolio-title').textContent = p.title;
+
+    const portfolioAlts = [
+      'Balayage rubio de autor en Mexicali - Iván Cerezo Hair Studio',
+      'Rubios personalizados en Mexicali con técnica couture blonde',
+      'Corrección de color profesional en peluquería en Mexicali',
+      'Corte de diseño y estilo editorial en Mexicali',
+      'Uñas de gel Mexicali con acabado premium',
+      'Maquillaje profesional para novias en Mexicali',
+      'Diseño y arquitectura de cejas con laminado',
+      'Hair studio de lujo en Mexicali'
+    ];
+
     $('portfolio-grid').innerHTML = data.images.portfolio
-      .map((src, i) => `<div class="portfolio-item portfolio-${i + 1}"><img src="${esc(src)}" alt="Trabajo de estilismo ${i + 1}" loading="lazy" /><span>0${i + 1}</span></div>`)
+      .map((src, i) => `<div class="portfolio-item portfolio-${i + 1}">
+        <img src="${esc(src)}" alt="${esc(portfolioAlts[i] || `Portafolio de belleza en Mexicali ${i + 1}`)}" loading="lazy" decoding="async" width="700" height="900" />
+        <span>0${i + 1}</span>
+      </div>`)
       .join('');
   }
 
@@ -107,6 +135,7 @@
     const r = data.sections.reservations;
     const submit = r.form.submit_button.text;
     const labelText = r.id.replace(/_/g, ' ');
+
     label($('reservation-label'), labelText);
     label($('modal-label'), labelText);
     $('reservation-title').textContent = r.title;
@@ -116,6 +145,7 @@
     $('form-submit').innerHTML = `${esc(submit)}${icon('arrow-up-right', 16)}`;
     $('reservation-city').textContent = r.location_map.city;
     $('reservation-meta').textContent = data.ui.reservation_meta;
+
     const exp = r.form.fields[0];
     $('form-experience').innerHTML = `<option value="">${esc(exp.placeholder)}</option>` +
       exp.options.map((o) => `<option>${esc(o)}</option>`).join('');
@@ -124,10 +154,9 @@
   function renderFooter() {
     $('footer-location').textContent = data.project_metadata.location;
     $('footer-instagram').href = data.ui.instagram_url;
-    $('footer-copy').textContent = `© 2024 ${data.project_metadata.brand_name}`;
+    $('footer-copy').textContent = `© ${new Date().getFullYear()} ${data.project_metadata.brand_name}`;
   }
 
-  /* Interacciones */
   function setMenu(open) {
     $('mobile-nav').hidden = !open;
     $('icon-menu').style.display = open ? 'none' : '';
@@ -140,34 +169,74 @@
     $('booking-content').hidden = false;
     $('booking-modal').hidden = false;
   }
-  function closeBooking() { $('booking-modal').hidden = true; }
+
+  function closeBooking() {
+    $('booking-modal').hidden = true;
+  }
+
+  function buildWhatsAppMessage(formData) {
+    const experience = formData.get('experience') || '';
+    const name = formData.get('name') || '';
+    const phone = formData.get('phone') || '';
+    const date = formData.get('date') || '';
+    const time = formData.get('time') || '';
+
+    return [
+      'Hola, quiero reservar una cita en Iván Cerezo Hair Studio Mexicali.',
+      '',
+      `Experiencia: ${experience}`,
+      `Nombre: ${name}`,
+      `Teléfono: ${phone}`,
+      `Fecha: ${date}`,
+      `Hora: ${time}`
+    ].join('\n');
+  }
 
   function bindEvents() {
     $('menu-toggle').addEventListener('click', () => setMenu($('mobile-nav').hidden));
-    $('mobile-nav').addEventListener('click', (e) => { if (e.target.closest('a, button')) setMenu(false); });
+    $('mobile-nav').addEventListener('click', (e) => {
+      if (e.target.closest('a, button')) setMenu(false);
+    });
 
     document.addEventListener('click', (e) => {
       if (e.target.closest('[data-open-booking]')) openBooking();
       else if (e.target.closest('[data-close-booking]')) closeBooking();
     });
-    $('booking-modal').addEventListener('mousedown', (e) => { if (e.target === e.currentTarget) closeBooking(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBooking(); });
+
+    $('booking-modal').addEventListener('mousedown', (e) => {
+      if (e.target === e.currentTarget) closeBooking();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBooking();
+    });
 
     $('booking-form').addEventListener('submit', (e) => {
       e.preventDefault();
+
+      const formData = new FormData(e.currentTarget);
+      const message = buildWhatsAppMessage(formData);
+      const waUrl = `https://wa.me/${data.ui.whatsapp_phone}?text=${encodeURIComponent(message)}`;
+
       $('booking-content').hidden = true;
       $('booking-success').hidden = false;
+
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     });
 
-    // Enlace activo en navegación de escritorio
     const links = Array.from(document.querySelectorAll('#desktop-nav .nav-link'));
     const sections = links.map((l) => document.querySelector(l.getAttribute('href')));
+
     const onScroll = () => {
       let current = 0;
-      sections.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top <= 120) current = i; });
+      sections.forEach((sec, i) => {
+        if (sec && sec.getBoundingClientRect().top <= 120) current = i;
+      });
       links.forEach((l, i) => l.classList.toggle('active', i === current));
     };
+
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   async function init() {
@@ -176,9 +245,10 @@
       if (!res.ok) throw new Error(res.status);
       data = await res.json();
     } catch (err) {
-      console.error('No se pudo cargar data/data.json. Si abres index.html con file://, usa un servidor local.', err);
+      console.error('No se pudo cargar data/data.json. Usa un servidor local en lugar de file://', err);
       return;
     }
+
     renderNav();
     renderHero();
     renderServices();
